@@ -132,10 +132,10 @@ def setup_wildcard_ssl(domain, email, exclude_base_domain):
 
 
 @click.command("procfile", help="Generate Procfile for bench start")
-def setup_procfile():
+@click.option("--skip-redis-config-generation", default=False, is_flag=True, help="Skip starting redis with bench start")
+def setup_procfile(skip_redis_config_generation):
 	from bench.config.procfile import setup_procfile
-	setup_procfile(".")
-
+	setup_procfile(".", skip_redis=skip_redis_config_generation)
 
 @click.command("socketio", help="Setup node dependencies for socketio server")
 def setup_socketio():
